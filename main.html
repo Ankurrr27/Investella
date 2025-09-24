@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investella - Be the boss of your money</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Global Styles --- */
+        :root {
+            --bg-dark: #09090C;
+            --text-light: #F0F0F0;
+            --text-muted: #A0A0B0;
+            --purple-light: #E600E6;
+            --purple-dark: #990099;
+            --gradient-main: linear-gradient(90deg, #E600E6, #990099);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        h2, h3 {
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        p {
+            color: var(--text-muted);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 40px;
+            background: var(--gradient-main);
+            color: var(--text-light);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 20px rgba(230, 0, 230, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(230, 0, 230, 0.5);
+        }
+        
+        /* --- Header & Navigation --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(9, 9, 12, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+        
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1rem;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text-light);
+            transform: translateY(-2px);
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+        
+        .hero-bg-sphere {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--purple-light), transparent 50%);
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.4;
+            animation: moveSphere 20s infinite alternate ease-in-out;
+            z-index: -1;
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(230, 0, 230, 0.5);
+            line-height: 1.2;
+        }
+        
+        .hero-title.gradient-text {
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.8rem);
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        /* --- Problem & Solution Section --- */
+        .problem-solution {
+            padding: 80px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .problem-solution h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .problem-solution-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        
+        .problem-solution-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+        }
+
+        .problem-solution-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        /* --- Offerings Section --- */
+        .offerings-section {
+            padding: 80px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .offerings-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .offerings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .offering-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .offering-icon-box {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-main);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(230, 0, 230, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .offering-item:hover .offering-icon-box {
+            transform: translateY(-10px) rotate(5deg);
+        }
+
+        .offering-icon-box span {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .offering-item h3 {
+            font-size: 1.2rem;
+        }
+
+        /* --- Social Impacts Section --- */
+        .social-impacts-section {
+            padding: 80px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .impact-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .impact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 180px;
+        }
+
+        .impact-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(230, 0, 230, 0.3), transparent 60%);
+            border: 2px solid rgba(230, 0, 230, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .impact-circle svg {
+            fill: var(--text-light);
+            width: 40px;
+            height: 40px;
+        }
+        
+        .impact-item p {
+            font-weight: 600;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        /* --- Team Section --- */
+        .team-section {
+            padding: 80px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+        
+        .team-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+        
+        .team-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .team-member {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 250px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 25px rgba(230, 0, 230, 0.3);
+        }
+
+        .team-member-photo {
+            width: 160px; /* Increased photo size */
+            height: 160px; /* Increased photo size */
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--purple-light); /* Slightly thicker border */
+            box-shadow: 0 0 20px rgba(230, 0, 230, 0.8); /* Brighter, more prominent glow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-member:hover .team-member-photo {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(230, 0, 230, 1);
+        }
+        
+        .team-member h3 {
+            font-size: 1.6rem; /* Slightly larger name font */
+            margin-bottom: 5px;
+            color: var(--text-light);
+            line-height: 1.2;
+        }
+
+        .team-member p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* --- Animations --- */
+        @keyframes moveSphere {
+            0% { transform: translate(-50%, -50%); }
+            100% { transform: translate(50%, 50%); }
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .problem-solution-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a href="#hero" class="nav-link">Home</a>
+            <a href="#problem" class="nav-link">Problem</a>
+            <a href="#offerings" class="nav-link">Offerings</a>
+            <a href="#impacts" class="nav-link">Impacts</a>
+            <a href="#team" class="nav-link">Team</a>
+        </nav>
+    </header>
+
+    <section class="hero-section" id="hero">
+        <div class="hero-bg-sphere" style="top: 10%; left: 10%;"></div>
+        <div class="hero-bg-sphere" style="bottom: 15%; right: 5%;"></div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">Investella</h1>
+            <p class="hero-subtitle">Be the boss of your money</p>
+            <a href="#problem" class="cta-button">Learn More</a>
+        </div>
+    </section>
+
+    <section class="problem-solution section-padding" id="problem">
+        <div class="container">
+            <h2>Problem & Solution</h2>
+            <div class="problem-solution-grid">
+                <div class="problem-solution-card">
+                    <h3>The Problem</h3>
+                    <p>India's stock market is predominantly male, with women representing only a small portion of investors. This is due to low financial literacy, a lack of confidence, societal stereotypes, and poor access to resources, which hinders women's ability to create wealth and achieve financial independence.</p>
+                </div>
+                <div class="problem-solution-card">
+                    <h3>The Solution</h3>
+                    <p>Investella is a women-centric finance app designed to bridge this gender gap. It connects women to financial policies, mentors, and gamified learning to help them track goals, plan budgets, and build confidence before they begin investing. The app will use AI chatbots and personalized recommendations to make learning fun and accessible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="offerings-section section-padding" id="offerings">
+        <div class="container text-center">
+            <h2 class="gradient-text">What We Offer</h2>
+            <p style="margin-top: 10px;">A money app for every step of your journey.</p>
+            <div class="offerings-grid">
+                <div class="offering-item">
+                    <div class="offering-icon-box"><span>1</span></div>
+                    <h3>Policy Access</h3>
+                </div>
+                <div class="offering-item">
+                    <div class="offering-icon-box"><span>2</span></div>
+                    <h3>Mentorship</h3>
+                </div>
+                <div class="offering-item">
+                    <div class="offering-icon-box"><span>3</span></div>
+                    <h3>First-Step Confidence</h3>
+                </div>
+                <div class="offering-item">
+                    <div class="offering-icon-box"><span>4</span></div>
+                    <h3>Awareness</h3>
+                </div>
+                <div class="offering-item">
+                    <div class="offering-icon-box"><span>5</span></div>
+                    <h3>Smart AI Assistance</h3>
+                </div>
+                <div class="offering-item">
+                    <div class="offering-icon-box"><span>6</span></div>
+                    <h3>Budget Planner</h3>
+                </div>
+                <div class="offering-item">
+                    <div class="offering-icon-box"><span>7</span></div>
+                    <h3>Gamified Learning</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="social-impacts-section section-padding" id="impacts">
+        <div class="container">
+            <h2 class="gradient-text">Social Impacts & Key Benefits</h2>
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <div class="impact-circle">
+                         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>
+                    </div>
+                    <p>Bridge Gender Gap</p>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-circle">
+                         <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3-9H9V6c0-1.66 1.34-3 3-3s3 1.34 3 3v2z"/></svg>
+                    </div>
+                    <p>Financial Independence</p>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-circle">
+                         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    </div>
+                    <p>Economic Growth</p>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-circle">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 15h-1V8.5H12v-1h-1.5zm2.5 0h-1V8.5h2.5V17z"/></svg>
+                    </div>
+                    <p>Financial Literacy</p>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-circle">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-4-4 1.5-1.5 2.5 2.5 5.5-5.5 1.5 1.5-7 7z"/></svg>
+                    </div>
+                    <p>Women's Empowerment</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section section-padding" id="team">
+        <div class="container">
+            <h2 class="gradient-text">Meet the Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="Prachi.jpg" alt="Prachi Gupta" class="team-member-photo">
+                    <h3>Prachi <br> Gupta</h3>
+                    <p>2024kucp1056</p>
+                </div>
+                <div class="team-member">
+                    <img src="Divy.jpg" alt="Divyanshi Purohit" class="team-member-photo">
+                    <h3>Divyanshi <br> Purohit</h3>
+                    <p>2024kucp1055</p>
+                </div>
+                <div class="team-member">
+                    <img src="Ankur.jpg" alt="Ankur Singh" class="team-member-photo">
+                    <h3>Ankur <br> Singh</h3>
+                    <p>2024kucp1053</p>
+                </div>
+                <div class="team-member">
+                    <img src="Chirag.jpg" alt="Chirag Singh" class="team-member-photo">
+                    <h3>Chirag <br> Singh</h3>
+                    <p>2024kucp1081</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Investella &copy; 2025. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
